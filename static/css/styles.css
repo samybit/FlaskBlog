@@ -1,0 +1,135 @@
+:root {
+  --color-primary: #F97068; /* Coral Red for accents */
+  --color-secondary: #3D5A80; /* Deep Teal for headers/footers */
+  --color-background: #F7F7FF; /* Ghost White */
+  --color-surface: #FFFFFF; /* White for cards */
+  --color-text-dark: #293241; /* Dark Slate for body text */
+  --color-text-muted: #A9B4C2; /* Muted Blue-Gray for subtitles */
+}
+
+body {
+  background: var(--color-background);
+  margin: 0;
+  font-family: 'Raleway', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--color-text-dark);
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-primary);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-secondary);
+}
+
+/* --- Layout --- */
+.wrapper {
+  position: relative;
+  clear: both;
+  margin: 0 auto 75px auto;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* --- Header Section --- */
+.top {
+  background: var(--color-secondary);
+  height: 180px;
+  border-bottom: 5px solid var(--color-primary); 
+}
+
+.top .title {
+  max-width: 800px;
+  margin: 40px auto 0 auto;
+  padding: 3em;
+  text-align: center;
+}
+
+.title h1 {
+  font-size: 32px;
+  color: var(--color-surface);
+  font-weight: 700;
+  margin: 0;
+}
+
+/* --- Content & Cards --- */
+.content {
+  margin: -60px auto 100px; 
+  padding-bottom: 20px;
+}
+
+.card {
+  position: relative;
+  background: var(--color-surface);
+  padding: 30px 40px;
+  max-width: 700px;
+  margin: 20px auto 30px auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(41, 50, 65, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(41, 50, 65, 0.15);
+}
+
+.card h1 { /* For post.html (main title) */
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--color-text-dark);
+}
+
+.card h2 { /* For index.html (card title) and post.html (subtitle) */
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: var(--color-secondary);
+}
+
+.card .text {
+  color: var(--color-text-muted); /* Muted color for subtitles */
+  margin-top: 15px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.card p { /* Body text */
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--color-text-dark);
+}
+
+/* Specific styling for the 'Read' link on index page */
+.card a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 15px;
+    background-color: var(--color-primary);
+    color: white;
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+.card a:hover {
+    background-color: #e56057; /* Slightly darker primary on hover */
+}
+
+
+/* --- Footer --- */
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--color-secondary);
+  color: var(--color-background);
+  text-align: center;
+  padding: 0px;
+  font-size: 14px;
+}
