@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from post import Post
 import requests
 
-url = "https://api.npoint.io/aec75888d3ff3212d032"
+url = "https://api.npoint.io/abfbbb2fb46d6ccd9494"
 response = requests.get(url)
 posts = response.json()
 
