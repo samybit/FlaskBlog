@@ -15,10 +15,12 @@ A dynamic blogging application built with Python and Flask. This project fetches
 
 ## 🛠️ Tech Stack
 
-* **Backend:** Python, Flask
-* **Templating:** Jinja
-* **Styling:** Custom CSS3
-* **Deployment:** Railway (WSGI Server)
+* **Backend:** Python 3.x, Flask
+* **Frontend:** HTML5, CSS3, JavaScript (Bootstrap 5)
+* **Templating:** Jinja2
+* **API:** RESTful JSON API (via `requests`)
+* **Server:** Gunicorn (WSGI)
+* **Deployment:** Railway
 
 ## 💡 Key Learnings & Technical Skills
 
@@ -57,16 +59,24 @@ If you want to run this project on your own machine:
 
 ```text
 .
-|-- main.py              # Application entry point and route definitions
-|-- post.py              # Class definition for Post objects
-|-- templates/
-|   |-- index.html       # Homepage template
-|   |-- post.html        # Single post view template
-|-- static/
+|-- main.py              # Application entry point, routes, and context processors
+|-- templates/           # HTML Templates (Jinja2)
+|   |-- index.html       # Home page (loops through posts)
+|   |-- post.html        # Individual post page (dynamic content)
+|   |-- about.html       # Static about page
+|   |-- contact.html     # Contact form page
+|   |-- header.html      # Reusable navigation & header
+|   |-- footer.html      # Reusable footer with dynamic year
+|-- static/              # Static Assets
 |   |-- css/
-|       |-- styles.css   # Global styles
-|-- Procfile             # Startup command for Railway/Render
-|-- requirements.txt     # List of python dependencies
+|       |-- styles.css   # Bootstrap & Custom styles
+|   |-- js/
+|       |-- scripts.js   # Theme interactions
+|   |-- assets/          # Images & Favicons
+|       |-- favicon.ico
+|       |-- img/
+|-- Procfile             # Production startup command
+|-- requirements.txt     # Python dependencies
 |-- README.md            # Project documentation
 ```
 
