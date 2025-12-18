@@ -26,7 +26,11 @@ def about():
 # contact GET
 @app.get('/contact')
 def contact_form():
-    return render_template("contact.html", msg_sent=False)
+    # check if message has been sent -> if the URL has "?success=True"
+    msg_sent = request.args.get('success')
+
+    # Pass status to the HTML
+    return render_template("contact.html", msg_sent=msg_sent)
 
 # contact POST
 @app.post('/contact')
@@ -36,7 +40,7 @@ def contact_submit():
     print(data["email"])
     print(data["phone"])
     print(data["message"])
-    return render_template("contact.html", msg_sent=True)
+    return redirect(url_for('contact_form', success=True))
 
 
 @app.route("/post/<int:index>")
