@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 import requests
 from datetime import datetime
 
@@ -12,6 +12,7 @@ app = Flask(__name__)
 def inject_now():
     return {'year': datetime.now().year}
 
+
 @app.route('/')
 def get_all_posts():
     return render_template("index.html", posts=all_posts)
@@ -22,9 +23,20 @@ def about():
     return render_template("about.html")
 
 
-@app.route('/contact')
-def contact():
-    return render_template("contact.html")
+# contact GET
+@app.get('/contact')
+def contact_form():
+    return render_template("contact.html", msg_sent=False)
+
+# contact POST
+@app.post('/contact')
+def contact_submit():
+    data = request.form
+    print(data["name"])
+    print(data["email"])
+    print(data["phone"])
+    print(data["message"])
+    return render_template("contact.html", msg_sent=True)
 
 
 @app.route("/post/<int:index>")
@@ -37,4 +49,4 @@ def show_post(index):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
