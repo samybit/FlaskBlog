@@ -1,0 +1,12 @@
+[project]
+name = "FlaskBlog"
+version = "1.0.0"
+requires-python = ">=3.10"
+
+[tool.ruff]
+line-length = 88
+fix = false
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
