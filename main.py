@@ -42,8 +42,7 @@ def send_email(name, email, phone, message):
 
     logging.info(f"Attempting to send email to {MY_EMAIL}...")
 
-    with smtplib.SMTP("smtp.gmail.com", 587) as connection:
-        connection.starttls()
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as connection:
         connection.login(MY_EMAIL, APP_PASSWORD)
         connection.sendmail(from_addr=MY_EMAIL, to_addrs=MY_EMAIL, msg=email_message)
 
