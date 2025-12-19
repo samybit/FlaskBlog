@@ -60,6 +60,7 @@ If you want to run this project on your own machine:
 ```text
 .
 |-- main.py              # Application entry point, routes, and context processors
+|-- pyproject.toml       # Ruff linter & formatter configuration
 |-- templates/           # HTML Templates (Jinja2)
 |   |-- index.html       # Home page (loops through posts)
 |   |-- post.html        # Individual post page (dynamic content)
@@ -73,10 +74,11 @@ If you want to run this project on your own machine:
 |   |-- js/
 |       |-- scripts.js   # Theme interactions
 |   |-- assets/          # Images & Favicons
-|       |-- favicon.ico
-|       |-- img/
-|-- Procfile             # Production startup command
+|-- .env                 # Environment variables (API keys & secrets)
+|-- .gitignore           # Specifies files to exclude from Git
+|-- Procfile             # Production startup command (Gunicorn)
 |-- requirements.txt     # Python dependencies
+|-- LICENSE              # Project License
 |-- README.md            # Project documentation
 ```
 
