@@ -24,9 +24,7 @@ APP_PASSWORD = os.getenv("APP_PASSWORD")
 all_posts = requests.get("https://api.npoint.io/abfbbb2fb46d6ccd9494").json()
 
 app = Flask(__name__)
-
 app.config["SECRET_KEY"] = "8BYkEfBA6O6donzWlSihBXox7C0sKR6s"
-
 bootstrap = Bootstrap5(app)
 
 
