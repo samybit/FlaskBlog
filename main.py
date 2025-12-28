@@ -1,13 +1,17 @@
-# Standard library imports
+# Standard
 import logging
 import os
 import smtplib
 from datetime import datetime
 
-# Third-party imports
+# Third-party
 import requests
 from dotenv import load_dotenv
 from flask import Flask, redirect, render_template, request, url_for
+from flask_bootstrap import Bootstrap5
+
+# Local
+from forms import ContactForm
 
 logging.basicConfig(level=logging.INFO)
 
@@ -21,18 +25,23 @@ all_posts = requests.get("https://api.npoint.io/abfbbb2fb46d6ccd9494").json()
 
 app = Flask(__name__)
 
+app.config["SECRET_KEY"] = "8BYkEfBA6O6donzWlSihBXox7C0sKR6s"
+
+bootstrap = Bootstrap5(app)
+
+
 # get and inject current year
 @app.context_processor
 def inject_now():
-    return {'year': datetime.now().year}
+    return {"year": datetime.now().year}
 
 
-@app.route('/')
+@app.route("/")
 def get_all_posts():
     return render_template("index.html", posts=all_posts)
 
 
-@app.route('/about')
+@app.route("/about")
 def about():
     return render_template("about.html")
 
@@ -48,16 +57,18 @@ def send_email(name, email, phone, message):
 
     logging.info("SMTP connection closed.")
 
+
 # contact GET
-@app.get('/contact')
+@app.get("/contact")
 def contact_form():
     # check if message has been sent -> if the URL has "?success=True"
-    msg_sent = request.args.get('success')
+    msg_sent = request.args.get("success")
     # Pass status to the HTML
     return render_template("contact.html", msg_sent=msg_sent)
 
+
 # contact POST and redirect
-@app.post('/contact')
+@app.post("/contact")
 def contact_submit():
     data = request.form
     logging.info(f"Form received! Name: {data['name']}, Email: {data['email']}")
@@ -65,7 +76,7 @@ def contact_submit():
     send_email(data["name"], data["email"], data["phone"], data["message"])
     logging.info("Email sent successfully.")
 
-    return redirect(url_for('contact_form', success=True))
+    return redirect(url_for("contact_form", success=True))
 
 
 @app.route("/post/<int:index>")
