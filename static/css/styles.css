@@ -10808,7 +10808,7 @@ header.masthead.post-header {
 }
 
 #music-btn {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: white;
@@ -10816,14 +10816,18 @@ header.masthead.post-header {
     width: 45px;
     height: 45px;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #music-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: rotate(360deg); /* spin on hover */
+    background: rgba(0, 0, 0, 0.5);
+    transform: rotate(360deg);
 }
 
-#music-btn.is-playing {
-    background: rgba(255, 255, 255, 0.9);
+#music-btn.isPlaying {
+    background: rgba(255, 255, 255, 0.5);
     color: #333;
+    border-color: #333;
 }

@@ -6,7 +6,7 @@ from datetime import datetime
 
 import requests
 from dotenv import load_dotenv
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 from flask_bootstrap import Bootstrap5
 
 from forms import ContactForm
@@ -42,6 +42,11 @@ def send_email(name, email, phone, message):
 @app.context_processor
 def inject_now():
     return {"year": datetime.now().year}
+
+# serve static assets music
+@app.route('/stream-music')
+def stream_music():
+    return send_from_directory('static/assets', 'utopia.mp3', mimetype='audio/mpeg')
 
 #--------------
 # Routes
