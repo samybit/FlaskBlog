@@ -1,4 +1,5 @@
 import logging
+import mimetypes
 import os
 import smtplib
 from datetime import datetime
@@ -19,6 +20,8 @@ APP_PASSWORD = os.getenv("APP_PASSWORD")
 
 # get all posts
 all_posts = requests.get("https://api.npoint.io/abfbbb2fb46d6ccd9494").json()
+
+mimetypes.add_type('audio/mpeg', '.mp3')
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "8BYkEfBA6O6donzWlSihBXox7C0sKR6s"
