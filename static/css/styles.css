@@ -10806,3 +10806,24 @@ header.masthead.post-header {
     padding-bottom: 5.2rem !important;
     margin-bottom: 2rem !important;
 }
+
+#music-btn {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    transition: all 0.3s ease;
+}
+
+#music-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(360deg); /* spin on hover */
+}
+
+#music-btn.is-playing {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+}

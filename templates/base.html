@@ -25,27 +25,28 @@
   <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
     <div class="container px-4 px-lg-5">
       <a class="navbar-brand" href="{{ url_for('get_all_posts') }}">MyBlog</a>
+      <div class="d-flex align-items-center ms-auto me-3">
+        <button id="music-btn" class="btn btn-outline-secondary btn-sm" onclick="toggleMusic()" style="border:none;"
+          title="Play Background Music">
+          <i class="fas fa-play" id="music-icon"></i>
+        </button>
+        <audio id="bg-audio" loop>
+          <source src="{{ url_for('static', filename='assets/utopia.mp3') }}" type="audio/mpeg">
+        </audio>
+      </div>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ms-auto py-4 py-lg-0">
           <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('get_all_posts') }}">Home</a>
           </li>
           <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('about') }}">About</a></li>
           <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('contact_form') }}">Contact</a>
-          </li>
-
-          <li class="nav-item d-flex align-items-center">
-            <button id="music-btn" class="btn btn-outline-secondary btn-sm ms-3" onclick="toggleMusic()"
-              style="border:none;" title="Play Background Music">
-              <i class="fas fa-play" id="music-icon"></i>
-            </button>
-            <audio id="bg-audio" loop preload="auto">
-              <source src="{{ url_for('static', filename='assets/Utopia.mp3') }}" type="audio/mpeg">
-            </audio>
           </li>
         </ul>
       </div>
@@ -100,6 +101,7 @@
     document.addEventListener("DOMContentLoaded", function () {
       var audio = document.getElementById("bg-audio");
       var icon = document.getElementById("music-icon");
+      var btn = document.getElementById("music-btn");
 
       // 1. Recover the saved state (Time and Playing Status)
       var savedTime = localStorage.getItem("musicTime");
@@ -111,27 +113,30 @@
 
       // 2. Try to auto-play if it was playing before
       if (isPlaying === "true") {
+        icon.classList.remove("fa-play");
+        icon.classList.add("fa-pause");
+        btn.classList.add("is-playing");
+
         var playPromise = audio.play();
 
         if (playPromise !== undefined) {
-          playPromise.then(_ => {
-            // Autoplay started!
-            icon.classList.remove("fa-play");
-            icon.classList.add("fa-pause");
-          })
-            .catch(error => {
-              // Autoplay was prevented by the browser (user hasn't clicked yet)
-              // We must wait for user interaction
-              console.log("Autoplay prevented. User must click play.");
-              localStorage.setItem("musicPlaying", "false");
-            });
+          playPromise.catch(error => {
+            // If Autoplay was prevented by browser
+            console.log("Autoplay prevented. User must click play.");
+
+            // Revert the UI since it failed
+            icon.classList.remove("fa-pause");
+            icon.classList.add("fa-play");
+            btn.classList.remove("is-playing");
+
+            localStorage.setItem("musicPlaying", "false");
+          });
         }
       }
 
       // 3. Save position before the page unloads (navigating to new page)
       window.addEventListener("beforeunload", function () {
         localStorage.setItem("musicTime", audio.currentTime);
-        // We don't save 'playing' here because we want to persist the INTENT to play
       });
     });
 
@@ -139,16 +144,19 @@
     function toggleMusic() {
       var audio = document.getElementById("bg-audio");
       var icon = document.getElementById("music-icon");
+      var btn = document.getElementById("music-btn");
 
       if (audio.paused) {
         audio.play();
         icon.classList.remove("fa-play");
         icon.classList.add("fa-pause");
+        btn.classList.add("is-playing");
         localStorage.setItem("musicPlaying", "true");
       } else {
         audio.pause();
         icon.classList.remove("fa-pause");
         icon.classList.add("fa-play");
+        btn.classList.remove("is-playing");
         localStorage.setItem("musicPlaying", "false");
       }
     }
