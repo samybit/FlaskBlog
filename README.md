@@ -6,31 +6,31 @@ A dynamic blogging application built with Python and Flask. This project fetches
 
 **View the deployed application here:** 👉 [https://web-production-db070.up.railway.app/](https://web-production-db070.up.railway.app/)
 
-## ✨ Features
+## ✨ Key Refactored Features
 
-* **Dynamic Content:** Fetches blog posts in real-time from a remote JSON API (npoint.io) using the `requests` library.
-* **Routing:** Implements dynamic URL routing (e.g., `/post/1`) to display individual posts.
-* **Templating:** Uses Jinja to dynamically render HTML titles, subtitles, and body content.
-* **Responsive Design:** Custom CSS styling with a modern color palette, card-based layout, and hover effects.
+* **Professional Form Handling:** Integrated **Flask-WTF** for secure, object-oriented form management, replacing standard HTML forms with validated Python classes.
+* **Jinja2 Template Inheritance:** Optimized the frontend architecture by moving from simple "includes" to a robust **Master Layout (`base.html`)** system with custom blocks.
+* **Custom UI Macros:** Developed reusable Jinja2 macros to render **Bootstrap 5 Floating Labels** with automated validation error feedback.
+* **Persistent Background Audio:** Engineered a "Web 1.0 vibe" background music player that persists across page reloads using **JavaScript LocalStorage** and a dedicated **Python Streaming Route** to bypass browser autoplay and caching restrictions.
+* **Responsive UX Design:** Enhanced the navigation bar for high-contrast visibility on mobile devices, ensuring accessibility across all viewports.
 
 ## 🛠️ Tech Stack
 
-* **Backend:** Python 3.x, Flask
-* **Frontend:** HTML5, CSS3, JavaScript (Bootstrap 5)
-* **Templating:** Jinja2
-* **API:** RESTful JSON API (via `requests`)
-* **Server:** Gunicorn (WSGI)
-* **Deployment:** Railway
+* **Backend:** Python 3.x, Flask, **Flask-WTF**, **Bootstrap-Flask**
+* **Frontend:** HTML5, CSS3, JavaScript (Bootstrap 5, FontAwesome)
+* **Templating:** Jinja2 (Inheritance & Macros)
+* **API/Data:** RESTful JSON API integration via `requests`
+* **Environment:** `python-dotenv` for secret management
+* **Deployment:** Railway (Gunicorn WSGI)
 
 ## 💡 Key Learnings & Technical Skills
 
-This project served as a comprehensive exercise in full-stack web development. Key skills demonstrated include:
+This project demonstrates a transition from basic web development to professional full-stack engineering:
 
-* **Deployment Workflow:** Successfully managed the lifecycle of a dynamic app by deploying to **Railway**, moving beyond local development.
-* **Server Configuration:** Configured a production environment using a **`Procfile`** to manage startup commands and **Gunicorn** as the WSGI server.
-* **Dependency Management:** Learned to maintain a clean build environment by stripping `requirements.txt` down to essential packages (`Flask`, `requests`, `gunicorn`).
-* **External API Integration:** Decoupled data from the application logic by fetching JSON data remotely, simulating a real-world CMS integration.
-* **Dynamic Routing & Templating:** Mastered Flask's variable rules (`<int:index>`) and Jinja loops to generate content programmatically.
+* **Object-Oriented Web Forms:** Implementing CSRF protection and server-side validation logic.
+* **Streaming Content Delivery:** Configured custom Flask routes and MIME-type handling to serve audio streams correctly across different browsers.
+* **State Management:** Using browser storage to maintain a seamless user experience during a stateless HTTP session (page transitions).
+* **Refactoring Mastery:** Successfully restructured a functional app to improve maintainability, security, and scalability.
 
 ## 🚀 How to Run Locally
 
@@ -60,20 +60,20 @@ If you want to run this project on your own machine:
 ```text
 .
 |-- main.py              # Application entry point, routes, and context processors
+|-- forms.py             # WTForms classes for secure user input
 |-- pyproject.toml       # Ruff linter & formatter configuration
 |-- templates/           # HTML Templates (Jinja2)
+|   |-- base.html        # Master layout (Navbar, Footer, JS Scripts)
 |   |-- index.html       # Home page (loops through posts)
 |   |-- post.html        # Individual post page (dynamic content)
 |   |-- about.html       # Static about page
 |   |-- contact.html     # Contact form page
-|   |-- header.html      # Reusable navigation & header
-|   |-- footer.html      # Reusable footer with dynamic year
 |-- static/              # Static Assets
 |   |-- css/
 |       |-- styles.css   # Bootstrap & Custom styles
 |   |-- js/
 |       |-- scripts.js   # Theme interactions
-|   |-- assets/          # Images & Favicons
+|   |-- assets/          # Background MP3 & Favicon
 |-- .env                 # Environment variables (API keys & secrets)
 |-- .gitignore           # Specifies files to exclude from Git
 |-- Procfile             # Production startup command (Gunicorn)
