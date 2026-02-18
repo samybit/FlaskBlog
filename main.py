@@ -21,11 +21,12 @@ APP_PASSWORD = os.getenv("APP_PASSWORD")
 # get all posts
 all_posts = requests.get("https://api.npoint.io/abfbbb2fb46d6ccd9494").json()
 
-mimetypes.add_type('audio/mpeg', '.mp3')
+mimetypes.add_type("audio/mpeg", ".mp3")
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "8BYkEfBA6O6donzWlSihBXox7C0sKR6s"
 bootstrap = Bootstrap5(app)
+
 
 def send_email(name, email, phone, message):
     email_message = f"Subject: Flask Blog message\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}"
@@ -38,19 +39,23 @@ def send_email(name, email, phone, message):
 
     logging.info("SMTP connection closed.")
 
+
 # get and inject current year
 @app.context_processor
 def inject_now():
     return {"year": datetime.now().year}
 
-# serve static assets music
-@app.route('/stream-music')
-def stream_music():
-    return send_from_directory('static/assets', 'utopia.mp3', mimetype='audio/mpeg')
 
-#--------------
+# serve static assets music
+@app.route("/stream-music")
+def stream_music():
+    return send_from_directory("static/assets", "utopia.mp3", mimetype="audio/mpeg")
+
+
+# --------------
 # Routes
-#--------------
+# --------------
+
 
 @app.route("/")
 def get_all_posts():
@@ -66,7 +71,9 @@ def about():
 def contact_form():
     form = ContactForm()
     if form.validate_on_submit():
-        logging.info(f"Form Validated! Name: {form.name.data}, Email: {form.email.data}")
+        logging.info(
+            f"Form Validated! Name: {form.name.data}, Email: {form.email.data}"
+        )
 
         send_email(form.name.data, form.email.data, form.phone.data, form.message.data)
         logging.info("Email sent successfully.")
